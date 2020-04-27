@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useHistory } from 'react';
 import axios from 'axios';
+
 
 
 const initialState = {
@@ -10,9 +11,10 @@ const initialState = {
 
 }
 
-export const Login = ()=>{
+export const Login = (props)=>{
 
     const [login, setLogin] = useState(initialState);
+    const history = useHistory();
 
     const handleChange = (e) => {
 
@@ -20,7 +22,7 @@ export const Login = ()=>{
 
     }
 
-    /*kljewrlkjewlkjrlkewjlrjlwek*/
+    
     const handleSubmit = (e) => {
 
         e.preventDefault();
@@ -28,6 +30,7 @@ export const Login = ()=>{
             .then(res=> {
 
                 console.log('Login data returning', res)
+                props.history.push('');
 
             })
             .catch(err=> {
@@ -42,7 +45,20 @@ export const Login = ()=>{
 
 
     return (
-        <div></div>
+        <div className='login'>
+
+            <h1>Login</h1>
+            <form onSubmit={handleSubmit}>
+
+                <label>Username:</label><input placeholder='username' onChange={handleChange} type='text' name='username' value={login.username}></input>
+
+                <label>Password:</label><input placeholder='password' onChange={handleChange} type='password' name='password' value={login.password}></input>
+
+                <button type='submit'>Login</button>
+
+            </form>
+
+        </div>
     )
 }
 

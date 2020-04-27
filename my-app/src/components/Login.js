@@ -56,8 +56,11 @@ export const Login = (props)=>{
 
                 <button type='submit'>Login</button>
 
+                {login.isFetching && 'Loading login page...'}
+
             </form>
 
+            {/* <div>Don't have an account? <Link to=''>Click here</Link></div> */}
         </div>
     )
 }

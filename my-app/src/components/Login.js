@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useHistory } from 'react';
+=======
+import React, { useState } from 'react';
+>>>>>>> abf3627d2fb1a2b9cfb45271d2500ec05a0dc235
 import axios from 'axios';
 
 
@@ -14,7 +18,10 @@ const initialState = {
 export const Login = (props)=>{
 
     const [login, setLogin] = useState(initialState);
+<<<<<<< HEAD
     const history = useHistory();
+=======
+>>>>>>> abf3627d2fb1a2b9cfb45271d2500ec05a0dc235
 
     const handleChange = (e) => {
 

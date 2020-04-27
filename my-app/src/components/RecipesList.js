@@ -22,7 +22,7 @@ export const RecipesList = props=>{
     )
 }
 
-const deleteRecipe  = pie =>{
+const deleteRecipe  = recipe =>{
     axiosWithAuth()              //unsure about endpoint for mapping through data
     .delete(`/recipe/$:id}`)
     .then(res=>console.log("recipe has been returned",res))
@@ -30,3 +30,6 @@ const deleteRecipe  = pie =>{
 }
 
 const editRecipe =({})
+
+
+const addRecipe =({})

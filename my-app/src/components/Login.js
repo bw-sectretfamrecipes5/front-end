@@ -1,4 +1,4 @@
-import React, { useState, useHistory } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 
@@ -14,7 +14,7 @@ const initialState = {
 export const Login = (props)=>{
 
     const [login, setLogin] = useState(initialState);
-    const history = useHistory();
+
 
     const handleChange = (e) => {
 
@@ -64,4 +64,6 @@ export const Login = (props)=>{
         </div>
     )
 }
+
+
 

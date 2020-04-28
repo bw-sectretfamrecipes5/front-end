@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { axiosWithAuth } from "./utils/AxiosWithAuth";
+import axiosWithAuth from "./utils/AxiosWithAuth";
 import RecipeList from "./RecipesList";
 
 const Recipe = () => {

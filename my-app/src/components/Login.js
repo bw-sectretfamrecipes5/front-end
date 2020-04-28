@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import * as yup from "yup";
 import styled from "styled-components";
 import "./Login.css";
+import axiosWithAuth from "./utils/AxiosWithAuth";
 
 const loginDiv = styled.div``;
 
@@ -59,8 +59,8 @@ export const Login = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("", login)
+    axiosWithAuth()
+      .post("/login", login)
       .then((res) => {
         console.log("Login data returning", res);
         props.history.push("/");

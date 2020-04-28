@@ -62,6 +62,10 @@ export const Login = (props) => {
       });
   };
 
+  const reloadPage = () => {
+    window.location.reload();
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axiosWithAuth()
@@ -71,6 +75,7 @@ export const Login = (props) => {
         props.setUserId(res.data.id);
         console.log("Login data returning", res);
         props.history.push("/recipe");
+        reloadPage(); 
       })
       .catch((err) => {
         console.log("Login data failed to return", err);

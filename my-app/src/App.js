@@ -18,20 +18,15 @@ function App() {
   let history = useHistory();
 
   return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route path="/register">
-            <Register history={history} />
-          </Route>
-          <Route exact path="/">
+  <div>
+        <Router>
+        <Route exact path="/">
             <Login setUserId={setUserId} history={history} />
           </Route>
-
-          <PrivateRoute path="/recipe" component={Recipe} />
-        </Switch>
-      </div>
-    </Router>
+        <Route path="/register" component={Register} />
+        <PrivateRoute path="/recipe" component={Recipe} />
+        </Router>
+        </div>
   );
 }
 

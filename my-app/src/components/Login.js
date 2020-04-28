@@ -70,7 +70,7 @@ export const Login = (props) => {
       .then((res) => {
         props.setUserId(res.data.id);
         console.log("Login data returning", res);
-        props.history.push("/");
+        props.history.push("/recipe");
       })
       .catch((err) => {
         console.log("Login data failed to return", err);
@@ -104,7 +104,12 @@ export const Login = (props) => {
           ></input>
         </div>
         <div className="form-div">
-          <button className="login-btn" disabled={!buttonEnabled} type="submit">
+
+          <button className="login-btn"
+          onClick={(e)=>
+        <Link to ="/recipe"/>
+        }
+          disabled={!buttonEnabled} type="submit">
             Login
           </button>
         </div>
@@ -123,22 +128,6 @@ export const Login = (props) => {
   );
 };
 
-{
-  /* 
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-
-                <label>Username:</label><input placeholder='username' onChange={handleChange} type='text' name='username' value={login.username}></input>
-
-                <label>Password:</label><input placeholder='password' onChange={handleChange} type='password' name='password' value={login.password}></input>
-
-                <button disabled={!buttonEnabled} type='submit'>Login</button>
-                <p>{loginFormErrors.username}</p>
-                <p>{loginFormErrors.password}</p>
-                {login.isFetching && 'Loading login page...'}
-
-            </form> */
-}
 
 {
   /* <div>Don't have an account? <Link to=''>Click here</Link></div> */

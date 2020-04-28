@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const initialRecipe = {
   title: "",
@@ -10,60 +11,42 @@ const initialRecipe = {
 };
 
 function AddRecipe(props) {
-  const [recipe, setRecipe] = useState(initialRecipe);
+    const { push } = useHistory();
+    const [recipe, setRecipe] = useState(initialRecipe)
 
-  return (
-    <div>
-      <h2>Add Recipe</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Title:</label>
-        <input
-          placeholder="title"
-          onChange={handleChange}
-          type="text"
-          name="title"
-          value={recipe.title}
-        ></input>
 
-        <label>Source:</label>
-        <input
-          placeholder="source"
-          onChange={handleChange}
-          type="text"
-          name="source"
-          value={recipe.source}
-        ></input>
+    
 
-        <label>Ingredients:</label>
-        <input
-          placeholder="ingredients"
-          onChange={handleChange}
-          type="text"
-          name="ingredients"
-          value={recipe.ingredients}
-        ></input>
+    return(
 
-        <label>Instructions:</label>
-        <input
-          placeholder="instructions"
-          onChange={handleChange}
-          type="text"
-          name="instructions"
-          value={recipe.instructions}
-        ></input>
+        <div>
 
-        <label>Category:</label>
-        <input
-          placeholder="category"
-          onChange={handleChange}
-          type="text"
-          name="category"
-          value={recipe.category}
-        ></input>
 
-        <button type="submit">Add Recipe</button>
-      </form>
-    </div>
-  );
+            <h2>Add Recipe</h2>
+            <form onSubmit={handleSubmit}>
+
+                <label>Title:</label><input placeholder='title' onChange={handleChange} type='text' name='title' value={recipe.title}></input>
+
+                <label>Source:</label><input placeholder='source' onChange={handleChange} type='text' name='source' value={recipe.source}></input>
+
+                <label>Ingredients:</label><input placeholder='ingredients' onChange={handleChange} type='text' name='ingredients' value={recipe.ingredients}></input>
+
+                <label>Instructions:</label><input placeholder='instructions' onChange={handleChange} type='text' name='instructions' value={recipe.instructions}></input>
+
+                <label>Category:</label><input placeholder='category' onChange={handleChange} type='text' name='category' value={recipe.category}></input>
+
+                <button type='submit'>Add Recipe</button>
+                
+
+            </form>
+
+
+        </div>
+
+
+    )
+
+
+
 }
 export default AddRecipe;

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "./utils/AxiosWithAuth";
 import RecipeList from "./RecipesList";
 
-const Recipes = () => {
+const Recipe = () => {
   const [recipeList, setRecipeList] = useState([]);
 
   useEffect(() => {
     axiosWithAuth()
-      .get("")
+      .get("/recipe")
       .then((res) => {
         setRecipeList(res.data);
         console.log("recipe data returned!", res);
@@ -23,4 +23,4 @@ const Recipes = () => {
   );
 };
 
-export default Recipes;
+export default Recipe;

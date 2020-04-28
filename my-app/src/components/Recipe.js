@@ -7,7 +7,7 @@ const Recipe = () => {
 
   useEffect(() => {
     axiosWithAuth()
-      .get("/recipe")
+      .get(`${props.userId}/recipe`)
       .then((res) => {
         setRecipeList(res.data);
         console.log("recipe data returned!", res);

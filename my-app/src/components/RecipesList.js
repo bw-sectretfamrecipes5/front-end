@@ -1,38 +1,63 @@
-import React from 'react';
-import {axiosWithAuth} from './utils/AxiosWithAuth';
+import React, { useState } from "react";
+import { axiosWithAuth } from "./utils/AxiosWithAuth";
 
-export const RecipesList = props=>{
+const initialRecipe = {
+  title: "",
+  source: "",
+  ingredients: "",
+  instructions: "",
+  category: "",
+};
 
-    const { recipes } = props
+export const RecipesList = (props) => {
+  const [editing, setEditing] = useState(false);
+  const [recipeToEdit, setRecipeToEdit] = useState(initialRecipe);
+  const [addRecipe, setAddRecipe] = useState(initialRecipe);
+  const { recipes } = props;
+  const reloadPage = () => {
+    window.location.reload();
+  };
+  const editRecipe = (recipe) => {
+    setEditing(true);
+    setRecipeToEdit(recipe);
+  };
+  const saveEdit = (e) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .put(`/recipe/${recipeToEdit.id}`, recipeToEdit)
+      .then(() => {
+        setEditing(false);
+        reloadPage();
+      });
+  };
+  const deleteRecipe = (recipe) => {
+    axiosWithAuth() //unsure about endpoint for mapping through data
+      .delete(`/recipe/${recipe.id}`, recipe)
+      .then((res) => console.log("recipe has been returned", res))
+      .catch((err) => console.log(err, "sorry, recipe could not be returned"));
+  };
 
-    return(
-        <div>
-            {recipes.map(recipe=>(
-                <div key ={recipe.id}>
-                    <h3>{recipe.title}</h3>
-                    <p>{recipe.category}</p>
-                    <p>{recipe.ingredients}</p>
-                    <p>{recipe.instructions}</p>
-                    <p>{recipe.source}</p>
+  const addRecipe = {};
 
-                    <button onClick ={e=>{
-                        deleteRecipe(recipe)
-                    }}>Delete</button>
+  return (
+    <div>
+      {recipes.map((recipe) => (
+        <div key={recipe.id}>
+          <h3>{recipe.title}</h3>
+          <p>{recipe.category}</p>
+          <p>{recipe.ingredients}</p>
+          <p>{recipe.instructions}</p>
+          <p>{recipe.source}</p>
 
-                    </div>
-            ))}
+          <button
+            onClick={(e) => {
+              deleteRecipe(recipe);
+            }}
+          >
+            Delete
+          </button>
         </div>
-    )
-}
-
-const deleteRecipe  = recipe =>{
-    axiosWithAuth()              //unsure about endpoint for mapping through data
-    .delete(`/recipe/$:id}`)
-    .then(res=>console.log("recipe has been returned",res))
-    .catch(err=>console.log(err, 'sorry, recipe could not be returned'))
-}
-
-const editRecipe =({})
-
-
-const addRecipe =({})
+      ))}
+    </div>
+  );
+};

@@ -39,7 +39,8 @@ const initialRecipe = {
 
   return (
     <div>
-      {recipes.map((recipe) => (
+
+      {props.recipes.map((recipe) => (
         <div key={recipe.id}>
           <h3>{recipe.title}</h3>
           <p>{recipe.category}</p>

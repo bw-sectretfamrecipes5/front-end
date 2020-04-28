@@ -68,7 +68,7 @@ export const Login = (props) => {
       .post("/login", login)
       // axios.post('https://secret-family-recipes-bw-team5.herokuapp.com/login', login)
       .then((res) => {
-        // props.setUserId(res.data.id);
+        props.setUserId(res.data.id);
         console.log("Login data returning", res);
         props.history.push("/");
       })

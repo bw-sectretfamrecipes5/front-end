@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import axiosWithAuth from './utils/AxiosWithAuth';
 
 const initialRecipe = {
   title: "",
@@ -14,8 +15,13 @@ function AddRecipe(props) {
     const { push } = useHistory();
     const [recipe, setRecipe] = useState(initialRecipe)
 
+useEffect(()=>{
 
-    
+    axiosWithAuth()
+    .post(`${props.userId}/recipe/`)
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+},[])
 
     return(
 

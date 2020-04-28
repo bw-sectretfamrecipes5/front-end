@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import  axiosWithAuth from './utils/AxiosWithAuth';
 import * as yup from 'yup'
 
 const initialState = {
@@ -80,7 +81,8 @@ function Register(props) {
 
         e.preventDefault();
 
-        axios.post('', register)
+        axiosWithAuth()
+        .post('/register', register)
             .then(res => {
 
                 props.history.push('/')

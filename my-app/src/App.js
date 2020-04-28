@@ -18,7 +18,7 @@ function App() {
         <Route path='/register'>
           <Register history={history}/>
         </Route>
-        <Route path='/login'>
+        <Route exact path='/' component={Login}>
           <Login history={history}/>
         </Route>
       </Switch>

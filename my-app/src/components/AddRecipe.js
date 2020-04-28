@@ -3,14 +3,12 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 const initialRecipe = {
-
-    title:'',
-    source:'',
-    ingredients:'',
-    instructions:'',
-    category:''
-
-}
+  title: "",
+  source: "",
+  ingredients: "",
+  instructions: "",
+  category: "",
+};
 
 function AddRecipe(props) {
     const { push } = useHistory();
@@ -51,5 +49,4 @@ function AddRecipe(props) {
 
 
 }
-export default AddRecipe
-
+export default AddRecipe;

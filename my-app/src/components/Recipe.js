@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "./utils/AxiosWithAuth";
 import RecipeList from "./RecipesList";
 
-const Recipes = () => {
+const Recipe = () => {
   const [recipeList, setRecipeList] = useState([]);
 
   useEffect(() => {
@@ -23,4 +23,4 @@ const Recipes = () => {
   );
 };
 
-export default Recipes;
+export default Recipe;

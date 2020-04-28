@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as yup from 'yup'
-import styled from 'styled-components'
 import './Login.css'
+import { gsap } from 'gsap'
+import { Link } from 'react-router-dom'
 
-const loginDiv = styled.div`
-
-
-
-`
 
 
 const initialState = {
@@ -22,8 +18,8 @@ const initialState = {
 const initialFormErrors = {
 
 
-    username:'Username is required!',
-    password:'Password is required!',
+    username:'*Username is required',
+    password:'*Password is required',
 
 }
 
@@ -31,12 +27,12 @@ const loginSchema = yup.object().shape({
 
     username: yup
         .string()
-        .min(3, 'Username must include at least 3 characters!')
-        .required('Username is required!'),
+        .min(3, '*Username must include at least 3 characters')
+        .required('*Username is required'),
     password: yup
         .string()
-        .min(5, 'Password must include at least 5 characters!')
-        .required('Password is required!')    
+        .min(5, '*Password must include at least 5 characters')
+        .required('*Password is required')    
 
 });
 
@@ -46,6 +42,14 @@ export const Login = (props)=>{
     const [loginFormErrors, setLoginFormErrors] = useState(initialFormErrors)
     const [buttonEnabled, setButtonEnabled] = useState(false)
 
+
+    useEffect(() => {
+
+        gsap.from(".login", {x:-500, duration:1.0, ease:"expo.out"})
+        gsap.fromTo(".login", {autoAlpha:0}, {autoAlpha:1, duration:1.0})
+
+
+    },[])
 
     useEffect(() => {
 
@@ -114,8 +118,10 @@ export const Login = (props)=>{
 
 
     return (
-        <div className='login'>
 
+        
+        <div className='login'>
+            
             <h1 className='login-header'>Login</h1>
             <form onSubmit={handleSubmit}>
                 <div className='form-div'>
@@ -127,13 +133,13 @@ export const Login = (props)=>{
                 <div className='form-div'>
                     <button className='login-btn' disabled={!buttonEnabled} type='submit'>Login</button>
                 </div>
-                <p>{loginFormErrors.username}</p>
-                <p>{loginFormErrors.password}</p>
+                <div className='form-errors'>{loginFormErrors.username}</div>
+                <div className='form-errors'>{loginFormErrors.password}</div>
                 {login.isFetching && 'Loading login page...'}
 
             </form>
 
-            {/* <div>Don't have an account? <Link to=''>Click here</Link></div> */}
+            <div className='no-account'>Don't have an account? <Link className='register-link' to='/register'>Click here</Link></div>
         </div>
     )
 }

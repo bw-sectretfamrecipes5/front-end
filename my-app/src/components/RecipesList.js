@@ -2,9 +2,12 @@ import React from 'react';
 import {axiosWithAuth} from './utils/AxiosWithAuth';
 
 export const RecipesList = props=>{
+
+    const { recipes } = props
+
     return(
         <div>
-            {props.recipes.map(recipe=>(
+            {recipes.map(recipe=>(
                 <div key ={recipe.id}>
                     <h3>{recipe.title}</h3>
                     <p>{recipe.category}</p>
@@ -22,7 +25,7 @@ export const RecipesList = props=>{
     )
 }
 
-const deleteRecipe  = pie =>{
+const deleteRecipe  = recipe =>{
     axiosWithAuth()              //unsure about endpoint for mapping through data
     .delete(`/recipe/$:id}`)
     .then(res=>console.log("recipe has been returned",res))
@@ -30,3 +33,6 @@ const deleteRecipe  = pie =>{
 }
 
 const editRecipe =({})
+
+
+const addRecipe =({})

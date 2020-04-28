@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import * as yup from 'yup'
 
 const initialState = {
 
@@ -9,14 +10,69 @@ const initialState = {
     isFetching: false
 
 }
+const initialFormErrors = {
+
+
+    username:'Username is required!',
+    password:'Password is required!',
+    email:'Email is required!'
+
+}
+
+const registerSchema = yup.object().shape({
+
+    username: yup
+        .string()
+        .min(3, 'Username must include at least 3 characters!')
+        .required('Username is required!'),
+    password: yup
+        .string()
+        .min(5, 'Password must include at least 5 characters!')
+        .required('Password is required!') ,
+    email: yup
+        .string()
+        .email('Must be a valid email address!')
+        .required('Email is required!')  
+
+});
 
 function Register(props) {
 
     const [register, setRegister] = useState(initialState)
+    const [registerFormErrors, setRegisterFormErrors] = useState(initialFormErrors)
+    const [buttonEnabled, setButtonEnabled] = useState(false)
+
+    useEffect(() => {
+
+        registerSchema.isValid(register)
+            .then(valid => {
+
+                setButtonEnabled(valid)
+
+            })
+            
+
+
+    }, [register])
 
     const handleChange = (e) => {
 
+        e.persist()
         setRegister({ ...register, [e.target.name]: e.target.value })
+
+        yup
+            .reach(registerSchema, e.target.name)
+            .validate(e.target.value)
+            .then(valid => {
+
+                setRegisterFormErrors({...registerFormErrors, [e.target.name]:''})
+
+            })
+            .catch(err => {
+
+                setRegisterFormErrors({...registerFormErrors, [e.target.name]: err.errors[0]})
+
+            })
 
     }
 
@@ -47,15 +103,20 @@ function Register(props) {
 
                 <form onSubmit={handleSubmit}>
                     
-                    <label>Username:</label><input placeholder='username' onChange={handleChange} type='text' name='username' value={login.username}></input>
+                    <label>Username:</label><input placeholder='username' onChange={handleChange} type='text' name='username' value={register.username}></input>
 
-                    <label>Password:</label><input placeholder='password' onChange={handleChange} type='password' name='password' value={login.password}></input>
+                    <label>Password:</label><input placeholder='password' onChange={handleChange} type='password' name='password' value={register.password}></input>
 
-                    <label>Email:</label><input placeholder='email' onChange={handleChange} type='text' name='email' value={login.email}></input>
+                    <label>Email:</label><input placeholder='email' onChange={handleChange} type='text' name='email' value={register.email}></input>
 
-                    <button type='submit'>Register</button>
+                    <button disabled={!buttonEnabled} type='submit'>Register</button>
 
-                    {login.isFetching && 'Loading register page...'}
+                    <p>{registerFormErrors.username}</p>
+                    <p>{registerFormErrors.password}</p>
+                    <p>{registerFormErrors.email}</p>
+                
+
+                    {register.isFetching && 'Loading register page...'}
 
                 </form>
 

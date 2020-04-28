@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import axiosWithAuth from './utils/AxiosWithAuth';
 import * as yup from 'yup'
 
 
@@ -40,25 +41,14 @@ export const Login = (props)=>{
 
 
     useEffect(() => {
-
-
         loginSchema.isValid(login)
             .then(valid => {
-
-
                 setButtonEnabled(valid)
-
-
             })
-
-
 
     }, [login])
 
-
-
-
-    
+ 
     
 
     const handleChange = (e) => {
@@ -87,7 +77,9 @@ export const Login = (props)=>{
 
         
         e.preventDefault();
-        axios.post('', login)
+        axiosWithAuth()
+        .post('/login', login)
+        // axios.post('', login)
             .then(res=> {
 
                 console.log('Login data returning', res)

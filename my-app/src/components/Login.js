@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as yup from 'yup'
+import styled from 'styled-components'
+import './Login.css'
+
+const loginDiv = styled.div`
+
+
+
+`
 
 
 const initialState = {
@@ -108,14 +116,17 @@ export const Login = (props)=>{
     return (
         <div className='login'>
 
-            <h1>Login</h1>
+            <h1 className='login-header'>Login</h1>
             <form onSubmit={handleSubmit}>
-
-                <label>Username:</label><input placeholder='username' onChange={handleChange} type='text' name='username' value={login.username}></input>
-
-                <label>Password:</label><input placeholder='password' onChange={handleChange} type='password' name='password' value={login.password}></input>
-
-                <button disabled={!buttonEnabled} type='submit'>Login</button>
+                <div className='form-div'>
+                    <label>Username: </label><input className='login-textbx' placeholder='username' onChange={handleChange} type='text' name='username' value={login.username}></input>
+                </div>
+                <div className='form-div'>
+                    <label>Password: </label><input className='login-textbx' placeholder='password' onChange={handleChange} type='password' name='password' value={login.password}></input>
+                </div>
+                <div className='form-div'>
+                    <button className='login-btn' disabled={!buttonEnabled} type='submit'>Login</button>
+                </div>
                 <p>{loginFormErrors.username}</p>
                 <p>{loginFormErrors.password}</p>
                 {login.isFetching && 'Loading login page...'}

@@ -1,0 +1,34 @@
+body {
+
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./loginImg/loginimage.jpg');
+    background-size:cover;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+
+}
+.login-header {
+
+    font-family: 'Homemade Apple', cursive;
+    font-size:60px;
+
+}
+.login {
+
+    border:1px solid red;
+    width:50%;
+    margin-top:9%;
+
+}
+.form-div {
+
+    margin:25px;
+    font-size:28px;
+
+}
+.login-textbx {
+
+    height:25px;
+    border-radius:8px;
+    padding-top:-5px;
+
+}

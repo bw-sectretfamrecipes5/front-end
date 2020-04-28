@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { axiosWithAuth } from "./utils/AxiosWithAuth";
+import  axiosWithAuth  from "./utils/AxiosWithAuth";
 
 const initialRecipe = {
   title: "",
@@ -9,7 +9,7 @@ const initialRecipe = {
   category: "",
 };
 
-export const RecipesList = (props) => {
+ const RecipesList = (props) => {
   const [editing, setEditing] = useState(false);
   const [recipeToEdit, setRecipeToEdit] = useState(initialRecipe);
   const [addRecipe, setAddRecipe] = useState(initialRecipe);
@@ -37,8 +37,6 @@ export const RecipesList = (props) => {
       .catch((err) => console.log(err, "sorry, recipe could not be returned"));
   };
 
-  const addRecipe = {};
-
   return (
     <div>
       {recipes.map((recipe) => (
@@ -61,3 +59,5 @@ export const RecipesList = (props) => {
     </div>
   );
 };
+
+export default RecipesList; 

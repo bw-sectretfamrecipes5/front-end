@@ -32,7 +32,7 @@ export const RecipesList = (props) => {
   };
   const deleteRecipe = (recipe) => {
     axiosWithAuth() //unsure about endpoint for mapping through data
-      .delete(`/recipe/${recipe.id}`, recipe)
+      .delete(`/4/recipe/${recipe.id}`, recipe)
       .then((res) => console.log("recipe has been returned", res))
       .catch((err) => console.log(err, "sorry, recipe could not be returned"));
   };

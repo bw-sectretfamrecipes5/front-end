@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Route, useHistory, Switch } from "react-router-dom"
@@ -9,7 +9,7 @@ import Register from "./components/Register"
 
 
 function App() {
-
+  const [userId, setUserId] = useState("");
   let history = useHistory();
 
   return (

@@ -4,20 +4,15 @@ import  axiosWithAuth from './utils/AxiosWithAuth';
 import * as yup from 'yup'
 
 const initialState = {
-
     username: '',
     password: '',
     email: '',
-    isFetching: false
-
+    // isFetching: false
 }
 const initialFormErrors = {
-
-
     username:'Username is required!',
     password:'Password is required!',
     email:'Email is required!'
-
 }
 
 const registerSchema = yup.object().shape({
@@ -47,12 +42,8 @@ function Register(props) {
 
         registerSchema.isValid(register)
             .then(valid => {
-
                 setButtonEnabled(valid)
-
             })
-            
-
 
     }, [register])
 
@@ -65,36 +56,28 @@ function Register(props) {
             .reach(registerSchema, e.target.name)
             .validate(e.target.value)
             .then(valid => {
-
                 setRegisterFormErrors({...registerFormErrors, [e.target.name]:''})
 
             })
             .catch(err => {
-
                 setRegisterFormErrors({...registerFormErrors, [e.target.name]: err.errors[0]})
-
             })
-
     }
 
     const handleSubmit = (e) => {
 
         e.preventDefault();
-
+        console.log(register);
         axiosWithAuth()
         .post('/register', register)
             .then(res => {
-
                 props.history.push('/')
                 console.log('Register data is returning', res)
-
             })
             .catch(err => {
-
-                console.log('Register data is not returning', err)
+                console.log('Register data is not returning!!!!', err)
 
             })
-
     }
 
     return (

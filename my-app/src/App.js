@@ -11,6 +11,7 @@ import {
 
 import { Login } from "./components/Login";
 import Register from "./components/Register";
+import RecipesList from "./components/RecipesList";
 
 function App() {
   const [userId, setUserId] = useState("");
@@ -22,6 +23,7 @@ function App() {
             <Login setUserId={setUserId} history={history} />
           </Route>
         <Route path="/register" component={Register} />
+        <Route path ='/:id/recipe/:recipe_id' component ={RecipesList}/>
         <PrivateRoute exact path="/:id/recipe" component ={Recipe}/>
       
         </div>

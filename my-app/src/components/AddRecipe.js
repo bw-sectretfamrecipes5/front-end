@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import axiosWithAuth from './utils/AxiosWithAuth';
 
 const initialRecipe = {
@@ -11,15 +11,18 @@ const initialRecipe = {
   category: "",
 };
 
-const  AddRecipe = props=> {
+const  AddRecipe = ({props, toUpdateRecipe, updatedRecipe })=> {
     const { push } = useHistory();
     const recipeId = localStorage.getItem('id');
     const [recipe, setRecipe] = useState(initialRecipe)
 
+    const {id} = useParams(); 
 
-    
+    axiosWithAuth()
+    .post(`/${id}/recipe/:recipe_id`)
+    .then(res=>console.log(res, 'addRecipe data working'))
+    .catch(err=>console.log(err, 'recipeData failed to return'))
 
-// useEffect(()=>{
 
 //     axiosWithAuth()
 //     .post(`${props.userId}/recipe/`)

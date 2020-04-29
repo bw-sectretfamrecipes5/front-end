@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import  axiosWithAuth  from "./utils/AxiosWithAuth";
+import { useParams } from "react-router-dom";
 
 const initialRecipe = {
   title: "",
@@ -13,6 +14,9 @@ const initialRecipe = {
   const [editing, setEditing] = useState(false);
   const [recipeToEdit, setRecipeToEdit] = useState(initialRecipe);
   const [addRecipe, setAddRecipe] = useState(initialRecipe);
+
+  const {id} = useParams(); 
+
   const { recipes } = props;
   const reloadPage = () => {
     window.location.reload();
@@ -31,10 +35,10 @@ const initialRecipe = {
       });
   };
   const deleteRecipe = (recipe) => {
-    axiosWithAuth() //unsure about endpoint for mapping through data
-      .delete(`/${props.userId}/recipe/${recipe.recipe_id}`)
-      .then((res) => console.log("recipe has been returned", res))
-      .catch((err) => console.log(err, "sorry, recipe could not be returned"));
+    axiosWithAuth() 
+      .delete(`/${id}/recipe/${recipe.id}`, recipe)
+      .then((res) => console.log("recipe has been removed", res))
+      .catch((err) => console.log(err, "sorry, recipe could not be removed"));
   };
 
   return (

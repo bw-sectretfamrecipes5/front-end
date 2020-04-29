@@ -6,7 +6,7 @@ const axiosWithAuth = () => {
   return axios.create({
     baseURL: "https://secret-family-recipes-bw-team5.herokuapp.com/api",
     headers: {
-      authorization: token,
+      Authorization: token,
     },
   });
 };

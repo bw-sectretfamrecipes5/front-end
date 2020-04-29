@@ -68,8 +68,8 @@ export const Login = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axiosWithAuth()
-    .post("/login", login)
+    // axiosWithAuth()
+    axios.post("https://secret-family-recipes-bw-team5.herokuapp.com/api/login", login)
     .then((res) => {
       localStorage.setItem('token', JSON.stringify(res.data.token));
         props.setUserId(res.data.id);

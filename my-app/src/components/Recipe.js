@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth  from "./utils/AxiosWithAuth";
-import RecipeList from "./RecipesList";
+import RecipesList from "./RecipesList";
 
 const Recipe = (props) => {
   const [recipeList, setRecipeList] = useState([]);
 
   useEffect(() => {
     axiosWithAuth()
-      .get(`/${props.userId}/recipe`)
+      .get(`/${props.userId}/recipe/`)
       .then((res) => {
         setRecipeList(res.data);
         console.log("recipe data returned!", res);
@@ -18,9 +18,11 @@ const Recipe = (props) => {
   return (
     <div>
       <h1>Welcome to Secret Family Recipes!</h1>
-      <RecipeList recipes={recipeList} />
+      <RecipesList recipes={recipeList} />
     </div>
   );
 };
 
 export default Recipe;
+
+

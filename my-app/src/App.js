@@ -24,7 +24,10 @@ function App() {
             <Login setUserId={setUserId} history={history} />
           </Route>
         <Route path="/register" component={Register} />
-        <PrivateRoute path="/recipe" component={Recipe} />
+        <PrivateRoute path="/recipe" >
+        <Recipe userId={userId}/>
+        </PrivateRoute>
+      
         </Router>
         </div>
   );

@@ -13,23 +13,34 @@ const initialRecipe = {
 
 function AddRecipe(props) {
     const { push } = useHistory();
+    const recipeId = localStorage.getItem('id');
     const [recipe, setRecipe] = useState(initialRecipe)
 
 useEffect(()=>{
 
     axiosWithAuth()
     .post(`${props.userId}/recipe/`)
+    // .post(`/:id/recipe/`)
     .then(res=>console.log(res))
     .catch(err=>console.log(err))
 },[])
 
-    return(
 
+
+// handleSubmit =e =>{
+//     e.preventDefault();
+//     axiosWithAuth()
+//     .post('/:id/recipe/')
+//     .then(res=>{props.AddRecipe(recipe)
+//     push('/')
+// }
+    return
+    (
         <div>
 
 
             <h2>Add Recipe</h2>
-            <form onSubmit={handleSubmit}>
+            <form>
 
                 <label>Title:</label><input placeholder='title' onChange={handleChange} type='text' name='title' value={recipe.title}></input>
 
@@ -41,7 +52,7 @@ useEffect(()=>{
 
                 <label>Category:</label><input placeholder='category' onChange={handleChange} type='text' name='category' value={recipe.category}></input>
 
-                <button type='submit'>Add Recipe</button>
+                <button onSubmit ={handleSubmit} type='submit'>Add Recipe</button>
                 
 
             </form>
@@ -52,7 +63,7 @@ useEffect(()=>{
 
     )
 
-
+    
 
 }
 export default AddRecipe;

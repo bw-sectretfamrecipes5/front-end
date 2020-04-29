@@ -1,11 +1,11 @@
- import React, {useState} from 'react';
+ import React, {useState, useEffect} from 'react';
  import axiosWithAuth from './utils/AxiosWithAuth';
  
 
  
  
  const SearchBar = (props)=>{
-     
+    
      // const [title, setTitle] = useState('');
      const {recipes} = props;
      const [searchTerm, setSearchTerm] = useState('');
@@ -16,6 +16,13 @@
          setSearchTerm(e.target.value)
      }
 
+    // useEffect(()=>{
+    //     return unfilteredRecipes.filter(recipe=>{
+    //    if(searchTerm===""){
+    //        return recipe
+    //    }
+    //    else if (recipe.title.includes(searchTerm))
+    // },[searchTerm])
 
 
  
@@ -35,7 +42,7 @@
       placeholder="search"
       value ={searchTerm}
       />
-  
+        {/* <button onClick={}>Search</button> */}
      </form>
    </div>
  )

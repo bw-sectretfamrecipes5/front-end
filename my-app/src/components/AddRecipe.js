@@ -12,6 +12,8 @@ const initialRecipe = {
 };
 
 const  AddRecipe = ( props )=> {
+    console.log(props)
+    console.log(props.userId)
     const { push } = useHistory();
     const recipeId = localStorage.getItem('id');
     const [addedRecipe, setAddedRecipe] = useState(initialRecipe)
@@ -26,14 +28,14 @@ const  AddRecipe = ( props )=> {
     const handleSubmit = e =>{
         e.preventDefault(); 
         axiosWithAuth()
-        // .post(`/${id}/recipe/`)
-            .post(`${props.userId}/recipe/`)
+        .post(`/${id}/recipe/`, addedRecipe)
+            // .post(`${props.userId}/recipe/`, setAddedRecipe)
         //     .then(res=>{props.AddRecipe(recipe)
         .then(res=>{
-            props.AddRecipe(addedRecipe)
+            // props.AddRecipe(addedRecipe)
           console.log(res, 'added recipe data working')
           setAddedRecipe(res.data);
-            push('/:id/recipe')
+            push(`/${id}/recipe/`)
         })
         .catch(err=>console.log(err, 'recipeData failed to return'))
        

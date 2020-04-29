@@ -69,13 +69,17 @@ export const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // axiosWithAuth()
-    axios.post("https://secret-family-recipes-bw-team5.herokuapp.com/api/login", login)
-    .then((res) => {
-      localStorage.setItem('token', JSON.stringify(res.data.token));
+    axios
+      .post(
+        "https://secret-family-recipes-bw-team5.herokuapp.com/api/login",
+        login
+      )
+      .then((res) => {
+        localStorage.setItem("token", JSON.stringify(res.data.token));
         props.setUserId(res.data.id);
         console.log("Login data returning", res);
         props.history.push(`/${res.data.id}/recipe`);
-        // reloadPage(); 
+        // reloadPage();
       })
       .catch((err) => {
         console.log("Login data failed to return", err);
@@ -109,12 +113,12 @@ export const Login = (props) => {
           ></input>
         </div>
         <div className="form-div">
-
-          <button className="login-btn"
-          onClick={(e)=>
-        <Link to ="/recipe"/>
-        }
-          disabled={!buttonEnabled} type="submit">
+          <button
+            className="login-btn"
+            onClick={(e) => <Link to="/recipe" />}
+            disabled={!buttonEnabled}
+            type="submit"
+          >
             Login
           </button>
         </div>
@@ -132,7 +136,6 @@ export const Login = (props) => {
     </div>
   );
 };
-
 
 {
   /* <div>Don't have an account? <Link to=''>Click here</Link></div> */

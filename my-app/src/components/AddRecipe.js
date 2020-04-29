@@ -11,19 +11,22 @@ const initialRecipe = {
   category: "",
 };
 
-function AddRecipe(props) {
+const  AddRecipe = props=> {
     const { push } = useHistory();
     const recipeId = localStorage.getItem('id');
     const [recipe, setRecipe] = useState(initialRecipe)
 
-useEffect(()=>{
 
-    axiosWithAuth()
-    .post(`${props.userId}/recipe/`)
-    // .post(`/:id/recipe/`)
-    .then(res=>console.log(res))
-    .catch(err=>console.log(err))
-},[])
+    
+
+// useEffect(()=>{
+
+//     axiosWithAuth()
+//     .post(`${props.userId}/recipe/`)
+//     // .post(`/:id/recipe/`)
+//     .then(res=>console.log(res))
+//     .catch(err=>console.log(err))
+// },[])
 
 
 
@@ -37,11 +40,8 @@ useEffect(()=>{
     return
     (
         <div>
-
-
             <h2>Add Recipe</h2>
             <form>
-
                 <label>Title:</label><input placeholder='title' onChange={handleChange} type='text' name='title' value={recipe.title}></input>
 
                 <label>Source:</label><input placeholder='source' onChange={handleChange} type='text' name='source' value={recipe.source}></input>
@@ -54,9 +54,7 @@ useEffect(()=>{
 
                 <button onSubmit ={handleSubmit} type='submit'>Add Recipe</button>
                 
-
             </form>
-
 
         </div>
 

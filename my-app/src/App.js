@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 import Recipe from "./components/Recipe";
@@ -8,8 +7,8 @@ import {
   BrowserRouter as Router,
   Route,
   useHistory,
-  Switch,
 } from "react-router-dom";
+
 import { Login } from "./components/Login";
 import Register from "./components/Register";
 
@@ -19,15 +18,15 @@ function App() {
 
   return (
   <div>
-        <Router>
+        {/* <Router> */}
         <Route exact path="/">
             <Login setUserId={setUserId} history={history} />
           </Route>
         <Route path="/register" component={Register} />
-        <PrivateRoute exact path="/:id/recipe" component ={Recipe} userId={userId}/>
+        <PrivateRoute exact path="/:id/recipe" component ={Recipe}/>
     
       
-        </Router>
+        {/* </Router> */}
         </div>
   );
 }

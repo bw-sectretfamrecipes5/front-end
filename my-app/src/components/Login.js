@@ -69,12 +69,12 @@ export const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/login", login)
-      // axios.post('https://secret-family-recipes-bw-team5.herokuapp.com/login', login)
-      .then((res) => {
+    .post("/login", login)
+    .then((res) => {
+      localStorage.setItem('token', JSON.stringify(res.data.token));
         props.setUserId(res.data.id);
         console.log("Login data returning", res);
-        props.history.push("/recipe");
+        props.history.push(`/${res.data.id}/recipe`);
         // reloadPage(); 
       })
       .catch((err) => {

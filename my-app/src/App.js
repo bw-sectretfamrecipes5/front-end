@@ -18,15 +18,12 @@ function App() {
 
   return (
   <div>
-        {/* <Router> */}
         <Route exact path="/">
             <Login setUserId={setUserId} history={history} />
           </Route>
         <Route path="/register" component={Register} />
         <PrivateRoute exact path="/:id/recipe" component ={Recipe}/>
-    
       
-        {/* </Router> */}
         </div>
   );
 }

@@ -19,6 +19,7 @@ const  AddRecipe = ( props )=> {
     const {id} = useParams(); 
  
     const handleChange = e =>{
+        e.preventDefault(); 
         setAddedRecipe({...addedRecipe, [e.target.name]:e.target.value})
     }
     
@@ -29,9 +30,10 @@ const  AddRecipe = ( props )=> {
         //     .post(`${props.userId}/recipe/`)
         //     .then(res=>{props.AddRecipe(recipe)
         .then(res=>{
+            props.AddRecipe(addedRecipe)
           console.log(res, 'added recipe data working')
           setAddedRecipe(res.data);
-            push('/:id/recipe/:recipe_id')
+            push('/:id/recipe')
         })
         .catch(err=>console.log(err, 'recipeData failed to return'))
        

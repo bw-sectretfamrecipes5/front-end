@@ -15,7 +15,7 @@ const initialRecipe = {
   const [recipeToEdit, setRecipeToEdit] = useState(initialRecipe);
   const [addRecipe, setAddRecipe] = useState(initialRecipe);
 
-  const {id} = useParams(); 
+  const {id} = useParams();
 
   const { recipes } = props;
   const reloadPage = () => {
@@ -36,7 +36,8 @@ const initialRecipe = {
   };
   const deleteRecipe = (recipe) => {
     axiosWithAuth() 
-      .delete(`/${id}/recipe/${recipe.id}`, recipe)
+    .delete(`/${props.userId}/recipe/${recipe.recipe_id}`, recipe)
+    //   .delete(`/${props.userId}/recipe/${recipe.recipe_id}`, recipe)
       .then((res) => console.log("recipe has been removed", res))
       .catch((err) => console.log(err, "sorry, recipe could not be removed"));
   };

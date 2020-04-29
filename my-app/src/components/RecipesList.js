@@ -54,12 +54,8 @@ const initialRecipe = {
           <p>{recipe.source}</p>
 
           <button
-            onClick={(e) => {
-              deleteRecipe(recipe);
-            }}
-          >
-            Delete
-          </button>
+            onClick={() => {
+              deleteRecipe(recipe)}}>Delete</button>
         </div>
       ))}
     </div>

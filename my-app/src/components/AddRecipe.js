@@ -11,49 +11,46 @@ const initialRecipe = {
   category: "",
 };
 
-const  AddRecipe = ({props, toUpdateRecipe, updatedRecipe })=> {
+const  AddRecipe = ( props )=> {
     const { push } = useHistory();
     const recipeId = localStorage.getItem('id');
-    const [recipe, setRecipe] = useState(initialRecipe)
+    const [addedRecipe, setAddedRecipe] = useState(initialRecipe)
 
     const {id} = useParams(); 
+ 
+    const handleChange = e =>{
+        setAddedRecipe({...addedRecipe, [e.target.name]:e.target.value})
+    }
+    
+    const handleSubmit = e =>{
+        e.preventDefault(); 
+        axiosWithAuth()
+        .post(`/${id}/recipe/:recipe_id`)
+        //     .post(`${props.userId}/recipe/`)
+        //     .then(res=>{props.AddRecipe(recipe)
+        .then(res=>{
+          console.log(res, 'added recipe data working')
+          setAddedRecipe(res.data);
+            push('/:id/recipe/:recipe_id')
+        })
+        .catch(err=>console.log(err, 'recipeData failed to return'))
+       
+    }
 
-    axiosWithAuth()
-    .post(`/${id}/recipe/:recipe_id`)
-    .then(res=>console.log(res, 'addRecipe data working'))
-    .catch(err=>console.log(err, 'recipeData failed to return'))
 
-
-//     axiosWithAuth()
-//     .post(`${props.userId}/recipe/`)
-//     // .post(`/:id/recipe/`)
-//     .then(res=>console.log(res))
-//     .catch(err=>console.log(err))
-// },[])
-
-
-
-// handleSubmit =e =>{
-//     e.preventDefault();
-//     axiosWithAuth()
-//     .post('/:id/recipe/')
-//     .then(res=>{props.AddRecipe(recipe)
-//     push('/')
-// }
-    return
-    (
+    return(
         <div>
             <h2>Add Recipe</h2>
-            <form>
-                <label>Title:</label><input placeholder='title' onChange={handleChange} type='text' name='title' value={recipe.title}></input>
+            <form >
+                <label>Title:</label><input placeholder='title' onChange={handleChange} type='text' name='title' value={addedRecipe.title}></input>
 
-                <label>Source:</label><input placeholder='source' onChange={handleChange} type='text' name='source' value={recipe.source}></input>
+                <label>Source:</label><input placeholder='source' onChange={handleChange} type='text' name='source' value={addedRecipe.source}></input>
 
-                <label>Ingredients:</label><input placeholder='ingredients' onChange={handleChange} type='text' name='ingredients' value={recipe.ingredients}></input>
+                <label>Ingredients:</label><input placeholder='ingredients' onChange={handleChange} type='text' name='ingredients' value={addedRecipe.ingredients}></input>
 
-                <label>Instructions:</label><input placeholder='instructions' onChange={handleChange} type='text' name='instructions' value={recipe.instructions}></input>
+                <label>Instructions:</label><input placeholder='instructions' onChange={handleChange} type='text' name='instructions' value={addedRecipe.instructions}></input>
 
-                <label>Category:</label><input placeholder='category' onChange={handleChange} type='text' name='category' value={recipe.category}></input>
+                <label>Category:</label><input placeholder='category' onChange={handleChange} type='text' name='category' value={addedRecipe.category}></input>
 
                 <button onSubmit ={handleSubmit} type='submit'>Add Recipe</button>
                 

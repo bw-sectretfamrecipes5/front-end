@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import axiosWithAuth from "./utils/AxiosWithAuth";
 import * as yup from "yup";
 
@@ -6,7 +7,7 @@ const initialState = {
   username: "",
   password: "",
   email: "",
-  //   isFetching: false,
+  // isFetching: false
 };
 const initialFormErrors = {
   username: "Username is required!",
@@ -62,7 +63,7 @@ function Register(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(register);
     axiosWithAuth()
       .post("/register", register)
       .then((res) => {
@@ -70,7 +71,7 @@ function Register(props) {
         console.log("Register data is returning", res);
       })
       .catch((err) => {
-        console.log("Register data is not returning", err);
+        console.log("Register data is not returning!!!!", err);
       });
   };
 

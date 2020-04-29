@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import * as yup from "yup";
-import styled from "styled-components";
 import "./Login.css";
 import axiosWithAuth from "./utils/AxiosWithAuth";
-
-const loginDiv = styled.div``;
+import { gsap } from "gsap";
+import { Link } from "react-router-dom";
+import * as yup from "yup";
 
 const initialState = {
   username: "",
   password: "",
-  isFetching: false,
+  //   isFetching: false,
 };
 
 const initialFormErrors = {
@@ -32,6 +31,11 @@ export const Login = (props) => {
   const [login, setLogin] = useState(initialState);
   const [loginFormErrors, setLoginFormErrors] = useState(initialFormErrors);
   const [buttonEnabled, setButtonEnabled] = useState(false);
+
+  useEffect(() => {
+    gsap.from(".login", { x: -500, duration: 1.0, ease: "expo.out" });
+    gsap.fromTo(".login", { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.0 });
+  }, []);
 
   useEffect(() => {
     loginSchema.isValid(login).then((valid) => {
@@ -57,13 +61,20 @@ export const Login = (props) => {
       });
   };
 
+  const reloadPage = () => {
+    window.location.reload();
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axiosWithAuth()
       .post("/login", login)
+      // axios.post('https://secret-family-recipes-bw-team5.herokuapp.com/login', login)
       .then((res) => {
+        props.setUserId(res.data.id);
         console.log("Login data returning", res);
-        props.history.push("/");
+        props.history.push("/recipe");
+        reloadPage();
       })
       .catch((err) => {
         console.log("Login data failed to return", err);
@@ -97,16 +108,26 @@ export const Login = (props) => {
           ></input>
         </div>
         <div className="form-div">
-          <button className="login-btn" disabled={!buttonEnabled} type="submit">
+          <button
+            className="login-btn"
+            onClick={(e) => <Link to="/recipe" />}
+            disabled={!buttonEnabled}
+            type="submit"
+          >
             Login
           </button>
         </div>
-        <p>{loginFormErrors.username}</p>
-        <p>{loginFormErrors.password}</p>
+        <div className="form-errors">{loginFormErrors.username}</div>
+        <div className="form-errors">{loginFormErrors.password}</div>
         {login.isFetching && "Loading login page..."}
       </form>
 
-      {/* <div>Don't have an account? <Link to=''>Click here</Link></div> */}
+      <div className="no-account">
+        Don't have an account?{" "}
+        <Link className="register-link" to="/register">
+          Click here
+        </Link>
+      </div>
     </div>
   );
 };

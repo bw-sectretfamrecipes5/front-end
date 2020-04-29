@@ -32,14 +32,14 @@ const RecipesList = (props) => {
   };
   const deleteRecipe = (recipe) => {
     axiosWithAuth() //unsure about endpoint for mapping through data
-      .delete(`/recipe/${recipe.id}`, recipe)
+      .delete(`/${props.userId}/recipe/${recipe.recipe_id}`)
       .then((res) => console.log("recipe has been returned", res))
       .catch((err) => console.log(err, "sorry, recipe could not be returned"));
   };
 
   return (
     <div>
-      {recipes.map((recipe) => (
+      {props.recipes.map((recipe) => (
         <div key={recipe.id}>
           <h3>{recipe.title}</h3>
           <p>{recipe.category}</p>
@@ -59,4 +59,5 @@ const RecipesList = (props) => {
     </div>
   );
 };
+
 export default RecipesList;

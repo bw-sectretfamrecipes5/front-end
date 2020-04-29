@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import axiosWithAuth from "./utils/AxiosWithAuth";
 import RecipeList from "./RecipesList";
 
-const Recipe = () => {
+const Recipe = (props) => {
   const [recipeList, setRecipeList] = useState([]);
 
   useEffect(() => {
     axiosWithAuth()
-      .get("/recipe")
+      .get(`/${props.userId}/recipe`)
       .then((res) => {
         setRecipeList(res.data);
         console.log("recipe data returned!", res);

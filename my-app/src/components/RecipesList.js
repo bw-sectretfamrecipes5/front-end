@@ -39,6 +39,8 @@ const RecipesList = (props) => {
       .catch((err) => console.log(err, "sorry, recipe could not be returned"));
   };
 
+
+
   return (
     <div>
       {recipes.map((recipe) => (
@@ -65,7 +67,7 @@ const RecipesList = (props) => {
           </button>
         </div>
       ))}
-      <div>
+      <div className="editForm">
         {editing && (
           <form onSubmit={saveEdit}>
             <h3 className="edit-title">Edit Recipe </h3>

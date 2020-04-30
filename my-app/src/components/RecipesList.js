@@ -39,10 +39,17 @@ console.log(recipes, 'recipes props data')
 
 
   const saveEdit = (e) => {
+    const newRecipe={
+      title: recipeToEdit.title,
+      source: recipeToEdit.source,
+      ingredients: recipeToEdit.ingredients,
+      instructions: recipeToEdit.instructions,
+      category: recipeToEdit.category,
+    }
     e.preventDefault();
     // console.log(recipeToEdit, 'recipe to edit data')
     axiosWithAuth()
-      .put(`/${id}/recipe/${recipeToEdit.recipe_id}`, recipeToEdit)
+      .put(`/${id}/recipe/${recipeToEdit.recipe_id}`, newRecipe)
       .then(res => {
         console.log(res, 'edit data returned')
         setEditing(false);

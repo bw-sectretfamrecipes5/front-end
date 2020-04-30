@@ -24,7 +24,8 @@ const RecipesList = (props) => {
   };
 
 
-
+console.log(recipes, 'recipes props data')
+ 
   const editRecipe = (recipe) => {
     setEditing(true);
     setRecipeToEdit(recipe);

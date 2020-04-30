@@ -16,7 +16,10 @@ const  AddRecipe = ( props )=> {
     // console.log(props.userId)
     const { push } = useHistory();
     const recipeId = localStorage.getItem('id');
-    const [addedRecipe, setAddedRecipe] = useState(initialRecipe)
+    const [addedRecipe, setAddedRecipe] = useState(initialRecipe);
+    const reloadPage = () => {
+            window.location.reload();
+          };
 
     const {id} = useParams(); 
     console.log({id});
@@ -38,6 +41,7 @@ const  AddRecipe = ( props )=> {
           setAddedRecipe(res.data);
             // push(`/${id}/recipe/`)
             push (`/1/recipe/`)
+            reloadPage(); 
         })
         .catch(err=>console.log(err, 'recipeData failed to return'))
        

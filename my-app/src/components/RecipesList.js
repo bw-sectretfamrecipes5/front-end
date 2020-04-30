@@ -3,6 +3,9 @@ import axiosWithAuth from "./utils/AxiosWithAuth";
 import { useParams, useHistory } from "react-router-dom";
 
 const initialRecipe = {
+  id: "",
+  user_id: "",
+  recipe_id: "",
   title: "",
   source: "",
   ingredients: "",
@@ -13,7 +16,7 @@ const initialRecipe = {
 const RecipesList = (props) => {
   const [editing, setEditing] = useState(false);
   const [recipeToEdit, setRecipeToEdit] = useState(initialRecipe);
-  const [addRecipe, setAddRecipe] = useState(initialRecipe);
+  const [newRecipe, setNewRecipe] = useState({});
   const { recipes } = props;
 
   const { push } = useHistory();
@@ -28,8 +31,13 @@ console.log(recipes, 'recipes props data')
  
   const editRecipe = (recipe) => {
     setEditing(true);
-    setRecipeToEdit(recipe);
+    
+    const edit = recipes.find((updatedRecipe)=>updatedRecipe.recipe_id=== recipe.recipe_id)
+    setRecipeToEdit(edit);
+    console.log(edit, 'edit variable');
   };
+
+
   const saveEdit = (e) => {
     e.preventDefault();
     // console.log(recipeToEdit, 'recipe to edit data')
@@ -57,6 +65,14 @@ console.log(recipes, 'recipes props data')
   };
 
 
+  const onChange = 
+    (e) =>{
+      const recipeValue = e.target.value
+                setNewRecipe({
+                  ...newRecipe,
+                 [e.target.name]:recipeValue
+                })
+  }
 
   return (
     <div>
@@ -89,47 +105,38 @@ console.log(recipes, 'recipes props data')
           <form onSubmit ={saveEdit}>
             <h3 className="edit-title">Edit Recipe </h3>
             <input
-              onChange={(e) =>
-                setRecipeToEdit({ ...recipeToEdit, title: e.target.value })
-              }
-              value={recipeToEdit.title}
+              name ="title"
+              placeholder ="title"
+              value={newRecipe.title}
+              onChange ={onChange}
             />
 
             <input
-              onChange={(e) =>
-                setRecipeToEdit({ ...recipeToEdit, source: e.target.value })
-              }
-              value={recipeToEdit.source}
+              onChange={onChange}
+              name="source"
+              placeholder ="source"
+              value={newRecipe.source}
             />
 
             <input
-              onChange={(e) =>
-                setRecipeToEdit({
-                  ...recipeToEdit,
-                  ingredients: e.target.value,
-                })
-              }
-              value={recipeToEdit.ingredients}
+              onChange={onChange}
+              name ="ingredients"
+              placeholder ="ingredients"
+              value={newRecipe.ingredients}
             />
 
             <input
-              onChange={(e) =>
-                setRecipeToEdit({
-                  ...recipeToEdit,
-                  instructions: e.target.value,
-                })
-              }
-              value={recipeToEdit.instructions}
+              onChange={onChange}
+              name ="instructions"
+              placeholder ="instructions"
+              value={newRecipe.instructions}
             />
 
             <input
-              onChange={(e) =>
-                setRecipeToEdit({
-                  ...recipeToEdit,
-                  category: e.target.value,
-                })
-              }
-              value={recipeToEdit.category}
+               onChange={onChange}
+               name ="category"
+               placeholder ="category"
+               value={newRecipe.category}
             />
             <button 
             type="submit">save</button>
@@ -139,6 +146,6 @@ console.log(recipes, 'recipes props data')
       </div>
     </div>
   );
-};
+        };
 
 export default RecipesList;

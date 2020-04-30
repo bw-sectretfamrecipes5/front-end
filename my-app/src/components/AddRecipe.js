@@ -68,7 +68,7 @@ const  AddRecipe = ( props )=> {
                 <label>Category:</label><input placeholder='category' 
                 onChange={handleChange} type='text' name='category' value={addedRecipe.category}></input>
 
-                <button className='btn' type='submit'>Add Recipe</button>
+                <button type='submit'>Add Recipe</button>
                 
             </form>
 

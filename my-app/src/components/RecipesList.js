@@ -99,14 +99,14 @@ console.log(recipes, 'recipes props data')
           <p>{recipe.instructions}</p>
           <p>{recipe.source}</p>
 
-          <button className='btn'
+          <button 
             onClick={() => {
               deleteRecipe(recipe);
             }}
           >
             Delete
           </button>
-          <button className='btn'
+          <button 
             onClick={() => {
               editRecipe(recipe);
             }}
@@ -153,9 +153,9 @@ console.log(recipes, 'recipes props data')
                placeholder ="category"
                value={recipeToEdit.category}
             />
-            <button className='btn'
+            <button 
             type="submit">save</button>
-            <button className='btn' onClick={() => setEditing(false)}>cancel</button>
+            <button  onClick={() => setEditing(false)}>cancel</button>
           </form>
         )}
       </div>

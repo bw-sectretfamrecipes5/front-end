@@ -4,7 +4,6 @@ import { useHistory, useParams } from "react-router-dom";
 import axiosWithAuth from "./utils/AxiosWithAuth";
 
 const initialRecipe = {
-  id: "",
   title: "",
   source: "",
   ingredients: "",
@@ -13,12 +12,17 @@ const initialRecipe = {
 };
 
 const AddRecipe = (props) => {
+  // console.log(props)
+  // console.log(props.userId)
   const { push } = useHistory();
-  //   const recipeId = localStorage.getItem("id");
+  const recipeId = localStorage.getItem("id");
   const [addedRecipe, setAddedRecipe] = useState(initialRecipe);
+  const reloadPage = () => {
+    window.location.reload();
+  };
 
   const { id } = useParams();
-
+  console.log({ id });
   const handleChange = (e) => {
     e.preventDefault();
     setAddedRecipe({ ...addedRecipe, [e.target.name]: e.target.value });
@@ -27,12 +31,17 @@ const AddRecipe = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post(`/1/recipe/`)
+      .post(`/${id}/recipe/`, addedRecipe)
+      // .post(`/1/recipe/`)
+      // .post(`${props.userId}/recipe/`, setAddedRecipe)
       //     .then(res=>{props.AddRecipe(recipe)
       .then((res) => {
+        // props.AddRecipe(addedRecipe)
         console.log(res, "added recipe data working");
-        setAddedRecipe(res.data.data);
-        push(`/1/recipe/`);
+        setAddedRecipe(res.data);
+        push(`/${id}/recipe/`);
+        // push (`/1/recipe/`)
+        reloadPage();
       })
       .catch((err) => console.log(err, "recipeData failed to return"));
   };
@@ -40,7 +49,7 @@ const AddRecipe = (props) => {
   return (
     <div>
       <h2>Add Recipe</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Title:</label>
         <input
           placeholder="title"
@@ -86,9 +95,7 @@ const AddRecipe = (props) => {
           value={addedRecipe.category}
         ></input>
 
-        <button onSubmit={handleSubmit} type="submit">
-          Add Recipe
-        </button>
+        <button type="submit">Add Recipe</button>
       </form>
     </div>
   );

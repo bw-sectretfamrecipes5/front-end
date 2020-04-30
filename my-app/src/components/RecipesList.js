@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import axiosWithAuth from "./utils/AxiosWithAuth";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const initialRecipe = {
-  id: 1,
   title: "",
   source: "",
   ingredients: "",
@@ -14,12 +13,15 @@ const initialRecipe = {
 const RecipesList = (props) => {
   const [editing, setEditing] = useState(false);
   const [recipeToEdit, setRecipeToEdit] = useState(initialRecipe);
-  // const [addRecipe, setAddRecipe] = useState(initialRecipe);
-  const { id } = useParams();
   const { recipes } = props;
+  const { push } = useHistory();
+
+  const { id } = useParams();
+
   const reloadPage = () => {
     window.location.reload();
   };
+
   const editRecipe = (recipe) => {
     setEditing(true);
     setRecipeToEdit(recipe);
@@ -27,17 +29,21 @@ const RecipesList = (props) => {
   const saveEdit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .put(`${id}/recipe/${recipeToEdit.id}`, recipeToEdit)
+      .put(`/${id}/recipe/${recipeToEdit.id}/`)
       .then(() => {
-        setEditing(false);
+        push(`/${id}/recipe/`);
         reloadPage();
       });
   };
 
   const deleteRecipe = (recipe) => {
     axiosWithAuth() //unsure about endpoint for mapping through data
-      .delete(`/${props.userId}/recipe/${recipe.recipe_id}`, recipe)
-      .then((res) => console.log("recipe has been returned", res))
+      .delete(`/${id}/recipe/${recipe.recipe_id}`, recipe)
+      .then((res) => {
+        console.log("recipe has been returned", res);
+        reloadPage();
+      })
+
       .catch((err) => console.log(err, "sorry, recipe could not be returned"));
   };
 
@@ -67,7 +73,7 @@ const RecipesList = (props) => {
           </button>
         </div>
       ))}
-      <div>
+      <div className="editForm">
         {editing && (
           <form onSubmit={saveEdit}>
             <h3 className="edit-title">Edit Recipe </h3>

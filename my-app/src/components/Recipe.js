@@ -3,6 +3,7 @@ import axiosWithAuth from "./utils/AxiosWithAuth";
 import { useParams } from "react-router-dom";
 import RecipesList from "./RecipesList";
 import AddRecipe from "./AddRecipe";
+import SearchBar from "./SearchBar";
 
 const Recipe = () => {
   const [recipeList, setRecipeList] = useState([]);
@@ -21,6 +22,7 @@ const Recipe = () => {
   return (
     <div>
       <h1>Welcome to Secret Family Recipes!</h1>
+      <SearchBar recipes={recipeList} />
       <AddRecipe />
       <RecipesList recipes={recipeList} />
     </div>

@@ -23,19 +23,22 @@ const RecipesList = (props) => {
     window.location.reload();
   };
 
+
+
   const editRecipe = (recipe) => {
     setEditing(true);
     setRecipeToEdit(recipe);
   };
   const saveEdit = (e) => {
     e.preventDefault();
+    // console.log(recipeToEdit, 'recipe to edit data')
     axiosWithAuth()
-      .put(`/${id}/recipe/${recipeToEdit.id}`, recipeToEdit)
+      .put(`/${id}/recipe/${recipeToEdit.recipe_id}`, recipeToEdit)
       .then(res => {
         console.log(res, 'edit data returned')
         setEditing(false);
         push(`/${id}/recipe/`)
-        // reloadPage();
+        reloadPage();
       })
       .catch(err=>console.log(err, 'edited recipe failed to return'))
   };
@@ -82,7 +85,7 @@ const RecipesList = (props) => {
       ))}
       <div className="editForm">
         {editing && (
-          <form>
+          <form onSubmit ={saveEdit}>
             <h3 className="edit-title">Edit Recipe </h3>
             <input
               onChange={(e) =>
@@ -127,7 +130,7 @@ const RecipesList = (props) => {
               }
               value={recipeToEdit.category}
             />
-            <button onClick ={()=>saveEdit()}
+            <button 
             type="submit">save</button>
             <button onClick={() => setEditing(false)}>cancel</button>
           </form>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axiosWithAuth from "./utils/AxiosWithAuth";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const initialRecipe = {
   title: "",
@@ -16,6 +16,7 @@ const RecipesList = (props) => {
   const [addRecipe, setAddRecipe] = useState(initialRecipe);
   const { recipes } = props;
 
+  const { push } = useHistory();
   const { id } = useParams();
 
   const reloadPage = () => {
@@ -30,10 +31,13 @@ const RecipesList = (props) => {
     e.preventDefault();
     axiosWithAuth()
       .put(`/${id}/recipe/${recipeToEdit.id}`, recipeToEdit)
-      .then(() => {
+      .then(res => {
+        console.log(res, 'edit data returned')
         setEditing(false);
-        reloadPage();
-      });
+        push(`/${id}/recipe/`)
+        // reloadPage();
+      })
+      .catch(err=>console.log(err, 'edited recipe failed to return'))
   };
 
   const deleteRecipe = (recipe) => {
@@ -41,6 +45,7 @@ const RecipesList = (props) => {
       .delete(`/${id}/recipe/${recipe.recipe_id}`, recipe)
       .then(res => {
         console.log("recipe has been returned", res)
+        
       reloadPage(); 
     })
     
@@ -77,7 +82,7 @@ const RecipesList = (props) => {
       ))}
       <div className="editForm">
         {editing && (
-          <form onSubmit={saveEdit}>
+          <form>
             <h3 className="edit-title">Edit Recipe </h3>
             <input
               onChange={(e) =>
@@ -122,7 +127,8 @@ const RecipesList = (props) => {
               }
               value={recipeToEdit.category}
             />
-            <button type="submit">save</button>
+            <button onClick ={()=>saveEdit()}
+            type="submit">save</button>
             <button onClick={() => setEditing(false)}>cancel</button>
           </form>
         )}

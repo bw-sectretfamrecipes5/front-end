@@ -43,7 +43,7 @@
               return recipe
             }
             else if (
-                recipe.title.includes(searchTerm) || recipe.category.includes(searchTerm))
+                recipe.title === searchTerm || recipe.category === searchTerm)
             {
                 console.log(recipe.title.includes(searchTerm))
                 console.log(recipe.category.includes(searchTerm))

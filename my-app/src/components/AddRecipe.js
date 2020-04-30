@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
 import axiosWithAuth from './utils/AxiosWithAuth';
+import './RecipesList.css'
 
 const initialRecipe = {
   title: "",
@@ -67,7 +68,7 @@ const  AddRecipe = ( props )=> {
                 <label>Category:</label><input placeholder='category' 
                 onChange={handleChange} type='text' name='category' value={addedRecipe.category}></input>
 
-                <button type='submit'>Add Recipe</button>
+                <button className='btn' type='submit'>Add Recipe</button>
                 
             </form>
 

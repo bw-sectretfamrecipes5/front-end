@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axiosWithAuth from "./utils/AxiosWithAuth";
 import { useParams, useHistory } from "react-router-dom";
+import './RecipesList.css'
 
 const initialRecipe = {
   id: "",
@@ -98,14 +99,14 @@ console.log(recipes, 'recipes props data')
           <p>{recipe.instructions}</p>
           <p>{recipe.source}</p>
 
-          <button
+          <button className='btn'
             onClick={() => {
               deleteRecipe(recipe);
             }}
           >
             Delete
           </button>
-          <button
+          <button className='btn'
             onClick={() => {
               editRecipe(recipe);
             }}
@@ -152,9 +153,9 @@ console.log(recipes, 'recipes props data')
                placeholder ="category"
                value={recipeToEdit.category}
             />
-            <button 
+            <button className='btn'
             type="submit">save</button>
-            <button onClick={() => setEditing(false)}>cancel</button>
+            <button className='btn' onClick={() => setEditing(false)}>cancel</button>
           </form>
         )}
       </div>

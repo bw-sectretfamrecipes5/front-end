@@ -1,17 +1,18 @@
  import React, {useState, useEffect} from 'react';
  import axiosWithAuth from './utils/AxiosWithAuth';
- 
+ import { useParams } from 'react-router-dom';
 
  
  
  const SearchBar = (props)=>{
-    
+    const { id } = useParams(); 
      // const [title, setTitle] = useState('');
      const {recipes} = props;
      const {setRecipeList} = props; 
      const [searchTerm, setSearchTerm] = useState('');
      const [unfilteredRecipes, setUnfitleredRecipes] = useState(recipes);
      
+
      const changeHandler = e =>{
          e.persist(); 
          setSearchTerm(e.target.value)
@@ -28,13 +29,11 @@
     //            }
     //  })}
 
-
-
-
-
     useEffect(() => {
-        setRecipeList(
-          recipes.filter(recipe=> {
+        axiosWithAuth()
+        .get(`/${id}/recipe/`)
+        .then((res) => {
+          setRecipeList( res.data.filter(recipe=> {
             if(searchTerm ==="")
             {
               return recipe
@@ -43,8 +42,11 @@
             {
               return recipe
             }
-          })
-        )
+          }));
+          console.log("recipe search data returned!", res);
+        })
+        .catch((err) => console.log("search data error in recipe", err)) 
+        
       }, [searchTerm])
 
 

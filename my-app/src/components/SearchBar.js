@@ -8,6 +8,7 @@
     
      // const [title, setTitle] = useState('');
      const {recipes} = props;
+     const {setRecipeList} = props; 
      const [searchTerm, setSearchTerm] = useState('');
      const [unfilteredRecipes, setUnfitleredRecipes] = useState(recipes);
      
@@ -16,25 +17,49 @@
          setSearchTerm(e.target.value)
      }
 
-     const handleSubmit = e=>{
-         e.preventDefault();
-         return unfilteredRecipes.filter(recipe=>{
-               if(searchTerm===""){
-                   return recipe
-               }
-               else if (recipe.title.includes(searchTerm) || recipe.category.includes(searchTerm)){
-                   return recipe
-               }
-     })}
+    //  const handleSubmit = e=>{
+    //      e.preventDefault();
+    //      return unfilteredRecipes.filter(recipe=>{
+    //            if(searchTerm===""){
+    //                return recipe
+    //            }
+    //            else if (recipe.title.includes(searchTerm) || recipe.category.includes(searchTerm)){
+    //                return recipe
+    //            }
+    //  })}
 
-    // useEffect(()=>{
-    //     return unfilteredRecipes.filter(recipe=>{
-    //    if(searchTerm===""){
-    //        return recipe
-    //    }
-    //    else if (recipe.title.includes(searchTerm))
-    // },[searchTerm])
 
+
+
+
+    useEffect(() => {
+        setRecipeList(
+          recipes.filter(recipe=> {
+            if(searchTerm ==="")
+            {
+              return recipe
+            }
+            else if ( recipe.title.includes(searchTerm) || recipe.category.includes(searchTerm))
+            {
+              return recipe
+            }
+          })
+        )
+      }, [searchTerm])
+
+
+//     useEffect(()=>{
+//     setRecipeList(
+//       recipes.filter(recipe=>(
+//        if(searchTerm===""){
+//            return recipe
+//        }
+//     //    else if (recipe.title.includes(searchTerm))
+//        else if (recipe.title.includes(searchTerm) || recipe.category.includes(searchTerm))
+//                       return recipe
+//                   })
+//     },[searchTerm])
+// }
 
  
 // const changeHandler = e =>{
@@ -53,9 +78,7 @@
       placeholder="search"
       value ={searchTerm}
       />
-        <button onClick={()=>{
-
-        }}>Search</button>
+        {/* <button onSubmit={handleSubmit}>Search</button> */}
      </form>
    </div>
  )

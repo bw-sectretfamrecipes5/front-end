@@ -5,6 +5,7 @@
 
 .App-header {
   background-color:white;
+  background-image:url("./loginImg/loginimage.jpg");
   min-height: 100vh;
   display: flex;
   flex-direction: column;

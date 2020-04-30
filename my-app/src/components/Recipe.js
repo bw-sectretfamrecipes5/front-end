@@ -2,19 +2,12 @@ import React, { useState, useEffect } from "react";
 import axiosWithAuth from "./utils/AxiosWithAuth";
 import { useParams } from "react-router-dom";
 import RecipesList from "./RecipesList";
-<<<<<<< HEAD
 import AddRecipe from "./AddRecipe";
 import SearchBar from "./SearchBar";
-=======
-import AddRecipe from './AddRecipe';
-import SearchBar from './SearchBar';
->>>>>>> 793404e375dd8910432168a4cff2d2759cb854d7
 
 const Recipe = () => {
-
   const [recipeList, setRecipeList] = useState([]);
   const { id } = useParams();
-
 
   useEffect(() => {
     axiosWithAuth()
@@ -29,13 +22,8 @@ const Recipe = () => {
   return (
     <div>
       <h1>Welcome to Secret Family Recipes!</h1>
-<<<<<<< HEAD
-      <SearchBar recipes={recipeList} />
+      <SearchBar recipes={recipeList} setRecipeList={setRecipeList} />
       <AddRecipe />
-=======
-      <SearchBar recipes={recipeList} setRecipeList={setRecipeList}/>
-      <AddRecipe/>
->>>>>>> 793404e375dd8910432168a4cff2d2759cb854d7
       <RecipesList recipes={recipeList} />
     </div>
   );

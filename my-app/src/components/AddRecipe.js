@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import axiosWithAuth from "./utils/AxiosWithAuth";
 
 const initialRecipe = {
+  id: "",
   title: "",
   source: "",
   ingredients: "",
@@ -13,7 +14,7 @@ const initialRecipe = {
 
 const AddRecipe = (props) => {
   const { push } = useHistory();
-  const recipeId = localStorage.getItem("id");
+  //   const recipeId = localStorage.getItem("id");
   const [addedRecipe, setAddedRecipe] = useState(initialRecipe);
 
   const { id } = useParams();
@@ -26,14 +27,12 @@ const AddRecipe = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      // .post(`/${id}/recipe/`)
-      .post(`${props.userId}/recipe/`)
+      .post(`/1/recipe/`)
       //     .then(res=>{props.AddRecipe(recipe)
       .then((res) => {
-        props.AddRecipe(addedRecipe);
         console.log(res, "added recipe data working");
-        setAddedRecipe(res.data);
-        push("/:id/recipe");
+        setAddedRecipe(res.data.data);
+        push(`/1/recipe/`);
       })
       .catch((err) => console.log(err, "recipeData failed to return"));
   };

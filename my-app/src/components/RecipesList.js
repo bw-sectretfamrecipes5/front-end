@@ -3,6 +3,7 @@ import axiosWithAuth from "./utils/AxiosWithAuth";
 import { useParams } from "react-router-dom";
 
 const initialRecipe = {
+  id: 1,
   title: "",
   source: "",
   ingredients: "",
@@ -13,7 +14,8 @@ const initialRecipe = {
 const RecipesList = (props) => {
   const [editing, setEditing] = useState(false);
   const [recipeToEdit, setRecipeToEdit] = useState(initialRecipe);
-  const [addRecipe, setAddRecipe] = useState(initialRecipe);
+  // const [addRecipe, setAddRecipe] = useState(initialRecipe);
+  const { id } = useParams();
   const { recipes } = props;
   const reloadPage = () => {
     window.location.reload();
@@ -25,13 +27,13 @@ const RecipesList = (props) => {
   const saveEdit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .put(`${props.userId}/recipe/${recipeToEdit.id}`, recipeToEdit)
+      .put(`${id}/recipe/${recipeToEdit.id}`, recipeToEdit)
       .then(() => {
         setEditing(false);
         reloadPage();
       });
   };
-  // const { id } = useParams();
+
   const deleteRecipe = (recipe) => {
     axiosWithAuth() //unsure about endpoint for mapping through data
       .delete(`/${props.userId}/recipe/${recipe.recipe_id}`, recipe)

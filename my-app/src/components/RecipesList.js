@@ -15,9 +15,13 @@ const RecipesList = (props) => {
   const [recipeToEdit, setRecipeToEdit] = useState(initialRecipe);
   const [addRecipe, setAddRecipe] = useState(initialRecipe);
   const { recipes } = props;
+
+  const { id } = useParams();
+
   const reloadPage = () => {
     window.location.reload();
   };
+
   const editRecipe = (recipe) => {
     setEditing(true);
     setRecipeToEdit(recipe);
@@ -31,11 +35,15 @@ const RecipesList = (props) => {
         reloadPage();
       });
   };
-  // const { id } = useParams();
+
   const deleteRecipe = (recipe) => {
     axiosWithAuth() //unsure about endpoint for mapping through data
-      .delete(`/${props.userId}/recipe/${recipe.recipe_id}`, recipe)
-      .then((res) => console.log("recipe has been returned", res))
+      .delete(`/${id}/recipe/${recipe.recipe_id}`, recipe)
+      .then(res => {
+        console.log("recipe has been returned", res)
+      reloadPage(); 
+    })
+    
       .catch((err) => console.log(err, "sorry, recipe could not be returned"));
   };
 

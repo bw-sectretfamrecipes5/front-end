@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import * as yup from 'yup';
 import './Register.css';
 import { gsap } from 'gsap'
 import { Link } from 'react-router-dom'
+import  axiosWithAuth from './utils/AxiosWithAuth';
+
+
+
 
 const initialState = {
-
     username: '',
     password: '',
     email: '',
-    isFetching: false
-
+    // isFetching: false
 }
 const initialFormErrors = {
-
 
     username:'*Username is required',
     password:'*Password is required',
@@ -57,12 +59,8 @@ function Register(props) {
 
         registerSchema.isValid(register)
             .then(valid => {
-
                 setButtonEnabled(valid)
-
             })
-            
-
 
     }, [register])
 
@@ -75,35 +73,28 @@ function Register(props) {
             .reach(registerSchema, e.target.name)
             .validate(e.target.value)
             .then(valid => {
-
                 setRegisterFormErrors({...registerFormErrors, [e.target.name]:''})
 
             })
             .catch(err => {
-
                 setRegisterFormErrors({...registerFormErrors, [e.target.name]: err.errors[0]})
-
             })
-
     }
 
     const handleSubmit = (e) => {
 
         e.preventDefault();
-
-        axios.post('', register)
+        console.log(register);
+        axiosWithAuth()
+        .post('/register', register)
             .then(res => {
-
                 props.history.push('/')
                 console.log('Register data is returning', res)
-
             })
             .catch(err => {
-
-                console.log('Register data is not returning', err)
+                console.log('Register data is not returning!!!!', err)
 
             })
-
     }
 
     return (

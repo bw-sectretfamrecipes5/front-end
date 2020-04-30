@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { axiosWithAuth } from "./utils/AxiosWithAuth";
-import RecipeList from "./RecipesList";
+import axiosWithAuth  from "./utils/AxiosWithAuth";
+import { useParams } from 'react-router-dom';
+import RecipesList from "./RecipesList";
+import AddRecipe from './AddRecipe';
+import SearchBar from './SearchBar';
 
-const Recipes = () => {
+const Recipe = () => {
+
   const [recipeList, setRecipeList] = useState([]);
+  const { id } = useParams(); 
+
 
   useEffect(() => {
     axiosWithAuth()
-      .get("/recipe")
+      .get(`/${id}/recipe/`)
       .then((res) => {
         setRecipeList(res.data);
         console.log("recipe data returned!", res);
@@ -18,9 +24,13 @@ const Recipes = () => {
   return (
     <div>
       <h1>Welcome to Secret Family Recipes!</h1>
-      <RecipeList recipes={recipeList} />
+      <SearchBar recipes={recipeList} setRecipeList={setRecipeList}/>
+      <AddRecipe/>
+      <RecipesList recipes={recipeList} />
     </div>
   );
 };
 
-export default Recipes;
+export default Recipe;
+
+

@@ -39,8 +39,8 @@ const  AddRecipe = ( props )=> {
             // props.AddRecipe(addedRecipe)
           console.log(res, 'added recipe data working')
           setAddedRecipe(res.data);
-            // push(`/${id}/recipe/`)
-            push (`/1/recipe/`)
+            push(`/${id}/recipe/`)
+            // push (`/1/recipe/`)
             reloadPage(); 
         })
         .catch(err=>console.log(err, 'recipeData failed to return'))

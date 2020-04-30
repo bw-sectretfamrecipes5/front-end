@@ -1,20 +1,18 @@
 body {
 
-
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("https://github.com/bw-sectretfamrecipes5/front-end/blob/patrick-harl/my-app/src/components/loginImg/loginimage.jpg?raw=true");
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./loginImg/loginimage.jpg');
     background-size:cover;
     color: white;
     font-family: 'Roboto', sans-serif;
-    text-align:center;
 
 }
-.login-header {
+.register-header {
 
     font-family: 'Homemade Apple', cursive;
     font-size:60px;
 
 }
-.login {
+.register {
 
     border:1px solid #e20074;
     width:25%;
@@ -29,7 +27,7 @@ body {
     font-size:28px;
 
 }
-.login-textbx {
+.register-textbx {
 
     height:30px;
     border-radius:8px;
@@ -40,14 +38,14 @@ body {
     border-style:none;
 
 }
-.login-textbx::placeholder {
+.register-textbx::placeholder {
 
     font-family: 'Roboto', sans-serif;
     opacity:0.75;
     font-size:16px;
 
 }
-.login-btn {
+.register-btn {
 
     width:125px;
     height:50px;
@@ -62,7 +60,7 @@ body {
     transition:0.2s;
 
 }
-.login-btn:disabled {
+.register-btn:disabled {
 
     width:125px;
     height:50px;
@@ -76,14 +74,14 @@ body {
     
 
 }
-.login-btn:hover {
+.register-btn:hover {
 
     color:white;
     background-color: #e20074;
     
 
 }
-.login-btn:disabled:hover {
+.register-btn:disabled:hover {
 
     color:rgba(226,0,116,0.3);
     background-color: rgba(0,0,0,0);
@@ -94,7 +92,7 @@ body {
     color:red;
 
 }
-.register-link {
+.login-link {
 
     text-decoration: none;
     color: #e20074;
@@ -106,5 +104,4 @@ body {
     margin-top:15px;
 
 }
-
 

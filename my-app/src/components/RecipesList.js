@@ -29,7 +29,7 @@ const RecipesList = (props) => {
   const saveEdit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .put(`${props.userId}/recipe/${recipeToEdit.id}`, recipeToEdit)
+      .put(`/${id}/recipe/${recipeToEdit.id}`, recipeToEdit)
       .then(() => {
         setEditing(false);
         reloadPage();

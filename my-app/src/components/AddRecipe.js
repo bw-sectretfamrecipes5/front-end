@@ -12,14 +12,14 @@ const initialRecipe = {
 };
 
 const  AddRecipe = ( props )=> {
-    console.log(props)
-    console.log(props.userId)
+    // console.log(props)
+    // console.log(props.userId)
     const { push } = useHistory();
     const recipeId = localStorage.getItem('id');
     const [addedRecipe, setAddedRecipe] = useState(initialRecipe)
 
     const {id} = useParams(); 
- 
+    console.log({id});
     const handleChange = e =>{
         e.preventDefault(); 
         setAddedRecipe({...addedRecipe, [e.target.name]:e.target.value})
@@ -29,13 +29,15 @@ const  AddRecipe = ( props )=> {
         e.preventDefault(); 
         axiosWithAuth()
         .post(`/${id}/recipe/`, addedRecipe)
+        // .post(`/1/recipe/`)
             // .post(`${props.userId}/recipe/`, setAddedRecipe)
         //     .then(res=>{props.AddRecipe(recipe)
         .then(res=>{
             // props.AddRecipe(addedRecipe)
           console.log(res, 'added recipe data working')
           setAddedRecipe(res.data);
-            push(`/${id}/recipe/`)
+            // push(`/${id}/recipe/`)
+            push (`/1/recipe/`)
         })
         .catch(err=>console.log(err, 'recipeData failed to return'))
        
@@ -45,7 +47,7 @@ const  AddRecipe = ( props )=> {
     return(
         <div>
             <h2>Add Recipe</h2>
-            <form >
+            <form onSubmit ={handleSubmit} >
                 <label>Title:</label><input placeholder='title' 
                 onChange={handleChange} type='text' name='title' value={addedRecipe.title}></input>
 
@@ -61,7 +63,7 @@ const  AddRecipe = ( props )=> {
                 <label>Category:</label><input placeholder='category' 
                 onChange={handleChange} type='text' name='category' value={addedRecipe.category}></input>
 
-                <button onSubmit ={handleSubmit} type='submit'>Add Recipe</button>
+                <button type='submit'>Add Recipe</button>
                 
             </form>
 

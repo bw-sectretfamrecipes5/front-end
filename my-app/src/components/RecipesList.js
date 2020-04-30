@@ -49,7 +49,7 @@ console.log(recipes, 'recipes props data')
         push(`/${id}/recipe/`)
         reloadPage();
       })
-      .catch(err=>console.log(err, 'edited recipe failed to return'))
+      .catch(err=>console.log(err, 'edited recipe failed to return', recipeToEdit.recipe_id))
   };
 
   const deleteRecipe = (recipe) => {

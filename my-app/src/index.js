@@ -3,7 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom';
+
+// import cors from 'cors'
+
+// var express = require('express');
+
+// var cors = require('cors');
+
+// var app = express();
+
+// app.use(cors());
+
+
 
 ReactDOM.render(
   <React.StrictMode>

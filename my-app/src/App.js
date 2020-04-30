@@ -1,29 +1,32 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
-import { Route, useHistory, Switch } from "react-router-dom"
+
+import Recipe from "./components/Recipe";
+import PrivateRoute from "./components/PrivateRoute";
+import {
+  BrowserRouter as Router,
+  Route,
+  useHistory,
+} from "react-router-dom";
+
 import { Login } from "./components/Login";
-import Register from "./components/Register"
-
-
-
+import Register from "./components/Register";
+import RecipesList from "./components/RecipesList";
 
 function App() {
-
+  const [userId, setUserId] = useState("");
   let history = useHistory();
 
   return (
-    <div className="App">
-      <Switch>
-        <Route path='/register'>
-          <Register history={history}/>
-        </Route>
-        <Route path='/login'>
-          <Login history={history}/>
-        </Route>
-      </Switch>
+  <div>
+        <Route exact path="/">
+            <Login setUserId={setUserId} history={history} />
+          </Route>
+        <Route path="/register" component={Register} />
+        <Route path ='/:id/recipe/:recipe_id' component ={RecipesList}/>
+        <PrivateRoute exact path="/:id/recipe" component ={Recipe}/>
       
-    </div>
+        </div>
   );
 }
 

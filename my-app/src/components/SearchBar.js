@@ -25,7 +25,7 @@
                else if (recipe.title.includes(searchTerm) || recipe.category.includes(searchTerm)){
                    return recipe
                }
-     }
+     })}
 
     // useEffect(()=>{
     //     return unfilteredRecipes.filter(recipe=>{

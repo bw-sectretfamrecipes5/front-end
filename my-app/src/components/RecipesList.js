@@ -65,6 +65,13 @@ console.log(recipes, 'recipes props data')
   };
 
 
+  const editOnChange = e =>{
+    setRecipeToEdit({
+      ...recipeToEdit,
+     [e.target.name]:e.target.value
+    })
+  }
+
   const onChange = 
     (e) =>{
       const recipeValue = e.target.value
@@ -107,36 +114,36 @@ console.log(recipes, 'recipes props data')
             <input
               name ="title"
               placeholder ="title"
-              value={newRecipe.title}
-              onChange ={onChange}
+              value={recipeToEdit.title}
+              onChange ={editOnChange}
             />
 
             <input
-              onChange={onChange}
+              onChange={editOnChange}
               name="source"
               placeholder ="source"
-              value={newRecipe.source}
+              value={recipeToEdit.source}
             />
 
             <input
-              onChange={onChange}
+              onChange={editOnChange}
               name ="ingredients"
               placeholder ="ingredients"
-              value={newRecipe.ingredients}
+              value={recipeToEdit.ingredients}
             />
 
             <input
-              onChange={onChange}
+              onChange={editOnChange}
               name ="instructions"
               placeholder ="instructions"
-              value={newRecipe.instructions}
+              value={recipeToEdit.instructions}
             />
 
             <input
-               onChange={onChange}
+               onChange={editOnChange}
                name ="category"
                placeholder ="category"
-               value={newRecipe.category}
+               value={recipeToEdit.category}
             />
             <button 
             type="submit">save</button>

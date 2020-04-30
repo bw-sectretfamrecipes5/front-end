@@ -16,6 +16,17 @@
          setSearchTerm(e.target.value)
      }
 
+     const handleSubmit = e=>{
+         e.preventDefault();
+         return unfilteredRecipes.filter(recipe=>{
+               if(searchTerm===""){
+                   return recipe
+               }
+               else if (recipe.title.includes(searchTerm) || recipe.category.includes(searchTerm)){
+                   return recipe
+               }
+     }
+
     // useEffect(()=>{
     //     return unfilteredRecipes.filter(recipe=>{
     //    if(searchTerm===""){
@@ -42,7 +53,9 @@
       placeholder="search"
       value ={searchTerm}
       />
-        {/* <button onClick={}>Search</button> */}
+        <button onClick={()=>{
+
+        }}>Search</button>
      </form>
    </div>
  )

@@ -5,6 +5,7 @@ body {
     background-size:cover;
     color: white;
     font-family: 'Roboto', sans-serif;
+    text-align:center;
 
 }
 .login-header {

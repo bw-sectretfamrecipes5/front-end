@@ -33,14 +33,22 @@
         axiosWithAuth()
         .get(`/${id}/recipe/`)
         .then((res) => {
+            console.log(res.data, 'res search data')
           setRecipeList( res.data.filter(recipe=> {
+              console.log(recipe.title)
+              console.log(recipe.category)
             if(searchTerm ==="")
             {
+               
               return recipe
             }
-            else if ( recipe.title.includes(searchTerm) || recipe.category.includes(searchTerm))
+            else if (
+                recipe.title.includes(searchTerm) || recipe.category.includes(searchTerm))
             {
+                console.log(recipe.title.includes(searchTerm))
+                console.log(recipe.category.includes(searchTerm))
               return recipe
+
             }
           }));
           console.log("recipe search data returned!", res);

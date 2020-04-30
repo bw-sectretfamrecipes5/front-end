@@ -124,7 +124,7 @@ function Register(props) {
 
                 </form>
 
-                <div className='no-account'>Already have an account? <Link className='login-link' to='/login'>Login here</Link></div>
+                <div className='no-account'>Already have an account? <Link className='login-link' to='/'>Login here</Link></div>
 
         </div>
 

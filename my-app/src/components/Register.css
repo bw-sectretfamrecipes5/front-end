@@ -1,6 +1,6 @@
 body {
 
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://github.com/bw-sectretfamrecipes5/front-end/blob/patrick-harl/my-app/src/components/loginImg/loginimage.jpg?raw=true');
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../loginImg/loginimage.jpg");
     background-size:cover;
     color: white;
     font-family: 'Roboto', sans-serif;

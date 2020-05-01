@@ -2,4 +2,4 @@
 Good luck and have fun ♥️
 
 deployed site: 
-secret-recipe.now.sh
+https://secret-recipe.now.sh/
